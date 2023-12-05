@@ -1,6 +1,6 @@
-﻿<div class="bg-light border m-4 col-5">
+﻿<div class="bg-light border m-4 col-5" @onclick="args => LastSelectedProduct(args, Product.Name)">
     <h4 class="text-secondary">Product -@Product.Id</h4>
-    <input type="checkbox" /> Add to favorite  <br /> <br/>
+    <input type="checkbox" @onchange="FavoriteUpdated" /> Add to favorite  <br /> <br />
     Name - @Product.Name<br />
     Show Properties: <input type="checkbox" @bind-value="Product.IsActive" checked="@(Product.IsActive?"checked":null)" /> @*Using Ternary Operator*@
 
@@ -16,9 +16,24 @@
 </div>
 
 @code {
-    [Parameter]
+    [Parameter] //this will help to pass the property from parent component
     public Demo_Product Product { get; set; }
 
+    //to implement the counter in demoproduct component we need to use eventcallback
+    [Parameter]
+    public EventCallback<bool> OnFavoriteUpdated { get; set; }
 
+    [Parameter]
+    public EventCallback<string> OnLastSelectedProductChange { get; set; }
+
+    private async Task FavoriteUpdated(ChangeEventArgs e)
+    {
+        await OnFavoriteUpdated.InvokeAsync((bool)e.Value); //e changed to boolen datatype (we will need explicit conversion)
+    }
+
+    private async Task LastSelectedProduct(MouseEventArgs m, string name)
+    {
+        await OnLastSelectedProductChange.InvokeAsync(name); //we don't need any explicit conversion
+    }
 
 }

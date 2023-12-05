@@ -1,14 +1,20 @@
 ﻿@page "/learnblazor/demoproduct"
 
 <h3 class="text-primary">DemoProduct</h3>
-<p>Total Favorites: @SelectedFavoriteCount </p>
+<p>Total Favorites: @SelectedFavoriteCount </p><br />
+
+<p>Last Selected Product: @LastSelectedProductName </p>
 <div class="border p-2 mt-2" style="background-color:azure">
     
     <div class="row">
         @foreach(var prod in Products)
         {
             //we should pass parameter
-            <_IndividualProduct Product="prod"></_IndividualProduct>
+            <_IndividualProduct Product="prod"
+                                OnFavoriteUpdated="FavoriteCountUpdate" OnLastSelectedProductChange="SelectedProductUpdate">
+
+
+            </_IndividualProduct>
         }
        
     </div>
@@ -20,7 +26,9 @@
 
     List<Demo_Product> Products = new();
 
+
     private int SelectedFavoriteCount { get; set; } = 0; //default is set to 0
+    private string LastSelectedProductName { get; set; }
 
     protected override void OnInitialized()
     {
@@ -63,5 +71,10 @@
         {
             SelectedFavoriteCount--;
         }
+    }
+
+    protected void SelectedProductUpdate(string productName)
+    {
+        LastSelectedProductName = productName;
     }
 }
