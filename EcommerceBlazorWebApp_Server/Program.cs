@@ -18,6 +18,10 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+else
+{
+    app.UseDeveloperExceptionPage();
+}
 
 app.UseHttpsRedirection();
 
@@ -25,7 +29,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.MapBlazorHub();
+//this will configure signalR for our application
+app.MapBlazorHub(); //signalR is the heart and engine of the Blazor application
 app.MapFallbackToPage("/_Host");
 
 app.Run();
