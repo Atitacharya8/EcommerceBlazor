@@ -9,7 +9,7 @@
 </_ChildComponent>
 <p>@messageText</p>
 
-<_AnotherChildComponent Placeholder="Placeholder from Parent" MaxLength="5"></_AnotherChildComponent>
+<_AnotherChildComponent placeholder="Placeholder from parent"></_AnotherChildComponent>
 
 @* <_ChildComponent OnButtonClick="ShowMessage" Title="this is second child component.">
 </_ChildComponent> *@
@@ -22,12 +22,6 @@
         messageText = "Button clicked from Child component";
     }
 
-     [Parameter]
-    public Dictionary<string, object> InputAttributes { get; set; } = new Dictionary<string, object>()
-    {
-        {"required", "required" },
-        {"placeholder", "Enter Name from Parent"},
-        {"maxlength", 5}
-    };
+  
 
 }

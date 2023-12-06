@@ -3,7 +3,7 @@
         Another Child Component
     </h4>
    @*  <input id="nametemp" placeholder="@Placeholder" required="@Required" maxlength="@MaxLength"/> *@
-   <input id="nametemp" @attributes="InputAttributes"/>
+   <input id="nametemp" @attributes="InputAttributes" placeholder="Child Placeholder"/>
 </div>
 
 
@@ -20,13 +20,9 @@
 
 
     //Dictionary is required for attribute splatting
-    [Parameter]
-    public Dictionary<string, object> InputAttributes { get; set; } = new Dictionary<string, object>()
-    {
-        {"required", "required" },
-        {"placeholder", "Initial Text"},
-        {"maxlength", 10}
-    };
+    [Parameter(CaptureUnmatchedValues =true)]
+    public Dictionary<string, object> InputAttributes { get; set; } = new Dictionary<string, object>();
+
 
 
 }
