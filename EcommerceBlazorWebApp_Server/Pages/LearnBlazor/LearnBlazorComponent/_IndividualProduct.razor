@@ -2,6 +2,9 @@
     <h4 class="text-secondary">Product -@Product.Id</h4>
     <input type="checkbox" @onchange="FavoriteUpdated" /> Add to favorite  <br /> <br />
     Name - @Product.Name<br />
+
+    <p>RF from Parent - @FirstFragment @SecondFragment</p>
+
     Show Properties: <input type="checkbox" @bind-value="Product.IsActive" checked="@(Product.IsActive?"checked":null)" /> @*Using Ternary Operator*@
 
     @if (Product.IsActive)
@@ -35,5 +38,13 @@
     {
         await OnLastSelectedProductChange.InvokeAsync(name); //we don't need any explicit conversion
     }
+
+ 
+    [Parameter]
+    public RenderFragment FirstFragment { get; set; }
+
+    [Parameter]
+    public RenderFragment SecondFragment { get; set; }
+
 
 }
