@@ -1,4 +1,5 @@
 ﻿@page "/learnblazor/blazorjs"
+
 @inject IJSRuntime _JsRuntime;
 
 <h3>BlazorJS</h3>
@@ -34,19 +35,19 @@
     {
         ConfirmResult = await _JsRuntime.InvokeAsync<bool>("confirm", ConfirmMessage);
 
-     }
+    }
 
-     //for toastr we don't have to return anything, wo we use invokevoidasync
+    //for toastr we don't have to return anything, wo we use invokevoidasync
 
     private async Task ToastrSuccess()
     {
-        await _JsRuntime.InvokeVoidAsync("ShowToastr", "success", "Success");
+        await _JsRuntime.ToastrSuccess("Operation Successful.");
 
     }
 
     private async Task ToastrError()
     {
-       await _JsRuntime.InvokeVoidAsync("ShowToastr", "error", "Error");
+        await _JsRuntime.ToastrError("Operation Failed!");
 
     }
 }
