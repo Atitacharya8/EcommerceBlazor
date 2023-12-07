@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Ecommerce_DataAccess\Ecommerce_DataAccess.csproj" />
+    <ProjectReference Include="..\Ecommerce_Models\Ecommerce_Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Repository\" />
+  </ItemGroup>
+
 </Project>
