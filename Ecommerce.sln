@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcommerceBlazorWebApp_Server", "EcommerceBlazorWebApp_Server\EcommerceBlazorWebApp_Server.csproj", "{A7D688A7-4BC2-4859-BD8C-E87C2B61A586}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcommerceBlazorWebApp_Server", "EcommerceBlazorWebApp_Server\EcommerceBlazorWebApp_Server.csproj", "{A7D688A7-4BC2-4859-BD8C-E87C2B61A586}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcommerceBlazorWebApp_Client", "EcommerceBlazorWebApp_Client\EcommerceBlazorWebApp_Client.csproj", "{3238E128-A909-4F4C-936D-482B446CBACB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcommerceBlazorWebApp_Client", "EcommerceBlazorWebApp_Client\EcommerceBlazorWebApp_Client.csproj", "{3238E128-A909-4F4C-936D-482B446CBACB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce_Models", "Ecommerce_Models\Ecommerce_Models.csproj", "{76F18C99-2A8B-46C5-9056-267D8AAAC355}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecommerce_Models", "Ecommerce_Models\Ecommerce_Models.csproj", "{76F18C99-2A8B-46C5-9056-267D8AAAC355}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

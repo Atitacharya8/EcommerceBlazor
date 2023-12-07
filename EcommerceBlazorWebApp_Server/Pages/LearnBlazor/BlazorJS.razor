@@ -59,7 +59,7 @@
 
     private async Task SweetAlertSuccess()
     {
-        await _JsRuntime.InvokeVoidAsync("ShowSwal", "success", "Task completed Successfully!");
+        await _JsRuntime.InvokeVoidAsync("ShowSwal", "success", "Task completed Successfully!"); // (method in js file, Type, message)
     }
 
     private async Task SweetAlertFailure()
