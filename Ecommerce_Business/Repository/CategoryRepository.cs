@@ -1,39 +1,34 @@
-﻿using Ecommerce_Business.Repository.IRepository;
+﻿using AutoMapper;
+using Ecommerce_Business.Repository.IRepository;
 using Ecommerce_DataAccess;
 using Ecommerce_DataAccess.Data;
 using Ecommerce_Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ecommerce_Business.Repository
 {
     public class CategoryRepository : ICategoryRepository
     {
         private readonly ApplicationDbContext _db;
+        private readonly IMapper _mapper;
 
-        public CategoryRepository(ApplicationDbContext db)
+        public CategoryRepository(ApplicationDbContext db, IMapper mapper)
         {
             _db = db;
+            _mapper = mapper;
+
         }
         public CategoryDTO Create(CategoryDTO objDTO) //CategoryDTO must be accessed by converting to its corresponding category object
         {
-            Category category = new Category()
-            {
-                Name = objDTO.Name,
-                Id = objDTO.Id,
-                CreatedDate = DateTime.Now,
-            };
-            _db.Categories.Add(category); //this will add the category to the database
-            _db.SaveChanges(); //this method must be used otherwise the data will not be stored in database
+            // convert from CategoryDTO to Category with source = objDTO
+            var obj = _mapper.Map<CategoryDTO, Category>(objDTO);
 
-            return new CategoryDTO()
-            {
-                Id = category.Id,
-                Name = category.Name,
-            };
+            //this will add the category to the database
+            var addedObj= _db.Categories.Add(obj);
+
+            //this method must be used otherwise the data will not be stored in database
+            _db.SaveChanges(); 
+
+            return _mapper.Map<Category, CategoryDTO>(addedObj.Entity); //source is addedObj
         }
 
         public int Delete(int id)
