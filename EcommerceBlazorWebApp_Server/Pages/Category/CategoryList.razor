@@ -70,15 +70,15 @@
     {
         if(firstRender){
             //we use loadcategories when it is first render and not the subsequent render
-            LoadCategories();
+           await LoadCategories();
         }
     }
 
-    private void LoadCategories() 
+    private async Task LoadCategories() 
     {
         IsLoading = true;
         StateHasChanged();
-        Categories = _categoryRepository.GetAll();
+        Categories = await _categoryRepository.GetAll();
         IsLoading = false;
         StateHasChanged();
 
@@ -97,9 +97,9 @@
         {
            
             //delete
-            _categoryRepository.Delete(DeleteCategoryId);
-            LoadCategories();
-            _jsRuntime.InvokeVoidAsync("HideDeleteConfirmationModal");
+            await _categoryRepository.Delete(DeleteCategoryId);
+            await LoadCategories();
+            await _jsRuntime.InvokeVoidAsync("HideDeleteConfirmationModal");
         }
         IsLoading = false;
     }
