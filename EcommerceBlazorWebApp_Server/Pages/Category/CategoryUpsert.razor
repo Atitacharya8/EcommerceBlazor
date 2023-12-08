@@ -1,4 +1,6 @@
 ﻿@page "/category/create"
+@page "/category/edit/{id:int}"
+
 @inject ICategoryRepository _categoryRepository
 @inject NavigationManager _navigationManager
 
@@ -8,7 +10,16 @@
     </h3>
 
     <div class="col-10">
-  <EditForm Model="Category" OnValidSubmit="UpsertCategory">
+        @if (IsLoading)
+        {
+            //loading git
+            <div class="text-center">
+                <img src="/images/loading.gif" />
+            </div>
+        }
+        else
+        {
+        <EditForm Model="Category" OnValidSubmit="UpsertCategory">
       <DataAnnotationsValidator/>
       @* <ValidationSummary/> *@
       <div class="form-group">
@@ -21,13 +32,42 @@
           <NavLink href="category" class="btn btn-secondary">Back to Index</NavLink>
       </div>
   </EditForm>
+        }
     </div>
 
 </div>
 
 @code {
+    [Parameter]
+    public int Id { get; set; }
+
     private CategoryDTO Category { get; set; } = new CategoryDTO();
     private string Title { get; set; } = "Create";
+    private bool IsLoading { get; set; } = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Id == 0)
+        {
+            //create
+            IsLoading = false;
+        }
+        else
+        {
+            //update
+            Title = "Edit";
+            await Task.Run(LoadCategory);
+        }
+        //this method(oninitialzedAsync) is used to display loading GIF when we face the delay while loading category list
+        
+    }
+
+    private void LoadCategory()
+    {
+        Category = _categoryRepository.Get(Id);
+        IsLoading = false;
+
+    }
 
 
     private void UpsertCategory()

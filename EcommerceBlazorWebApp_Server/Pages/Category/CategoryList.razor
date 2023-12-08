@@ -7,11 +7,12 @@
         <h4 class="card-title text-primary">Category List</h4>
     </div>
     <div class="col-4 offset-2">
-        <a href="category/create" class="btn btn-primary form-control">Add New Category
-        </a> 
+        <a href="category/create" class="btn btn-primary form-control">
+            Add New Category
+        </a>
     </div>
     <div class="col-12">
-        @if(Categories.Any())
+        @if (Categories.Any())
         {
             <table class="table table-bordered">
                 <thead>
@@ -22,16 +23,17 @@
                 </thead>
 
                 <tbody>
-                    @foreach(var obj in Categories){
-                    <tr>
-                        <td>
-                            @obj.Name
-                        </td>
-                        <td>
-                        <NavLink href="" class="btn btn-primary">Edit</NavLink>
-                               <NavLink href="" class="btn btn-danger">Delete</NavLink>
+                    @foreach (var objCat in Categories)
+                    {
+                        <tr>
+                            <td>
+                                @objCat.Name
                             </td>
-                    </tr>
+                            <td>
+                                <NavLink href="@($"category/edit/{objCat.Id}")" class="btn btn-primary">Edit</NavLink>
+                                <NavLink href="@($"category/delete/")" class="btn btn-danger">Delete</NavLink>
+                            </td>
+                        </tr>
                     }
                 </tbody>
             </table>
@@ -65,7 +67,7 @@
         await Task.Run(LoadCategories);
     }
 
-    private void LoadCategories()
+    private void LoadCategories() 
     {
         Categories = _categoryRepository.GetAll();
         IsLoading = false;
