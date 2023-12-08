@@ -22,6 +22,8 @@ namespace Ecommerce_Business.Repository
             // convert from CategoryDTO to Category with source = objDTO
             var obj = _mapper.Map<CategoryDTO, Category>(objDTO);
 
+            obj.CreatedDate = DateTime.Now;
+
             //this will add the category to the database
             var addedObj= _db.Categories.Add(obj);
 
@@ -33,22 +35,46 @@ namespace Ecommerce_Business.Repository
 
         public int Delete(int id)
         {
-            throw new NotImplementedException();
+            var obj = _db.Categories.FirstOrDefault(c=>c.Id == id);
+            if(obj != null)
+            {
+                _db.Categories.Remove(obj);
+                return _db.SaveChanges();
+            }
+            return 0;
         }
 
         public CategoryDTO Get(int id)
         {
-            throw new NotImplementedException();
+            var obj = _db.Categories.FirstOrDefault(c => c.Id == id);
+            if (obj != null)
+            {
+                
+             return _mapper.Map<Category, CategoryDTO>(obj);
+            }
+
+            //if null return new category DTO
+            return new CategoryDTO();
         }
 
         public IEnumerable<CategoryDTO> GetAll()
         {
-            throw new NotImplementedException();
+            return _mapper.Map<IEnumerable<Category>, IEnumerable<CategoryDTO>>(_db.Categories); //source will be retrieved using _db.Categories
         }
 
         public CategoryDTO Update(CategoryDTO objDTO)
         {
-            throw new NotImplementedException();
+            var objFromDb = _db.Categories.FirstOrDefault(c => c.Id == objDTO.Id);
+            if( objFromDb != null )
+            {
+                objFromDb.Name=objDTO.Name; //we only use name here so id and createddate are not used
+                _db.Categories.Update(objFromDb);
+                _db.SaveChanges();
+                return _mapper.Map<Category, CategoryDTO>(objFromDb);
+                
+            }
+            return objDTO; //if something is not valid the original name will be returned
         }
     }
 }
+e
