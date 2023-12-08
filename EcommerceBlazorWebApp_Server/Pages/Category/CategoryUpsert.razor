@@ -55,11 +55,11 @@
         else
         {
             //update
-            Title = "Edit";
+            Title = "Update";
             await Task.Run(LoadCategory);
         }
         //this method(oninitialzedAsync) is used to display loading GIF when we face the delay while loading category list
-        
+
     }
 
     private void LoadCategory()
@@ -72,8 +72,16 @@
 
     private void UpsertCategory()
     {
-        _categoryRepository.Create(Category);
+        if(Category.Id == 0){
+            //create
+            _categoryRepository.Create(Category);
+            
+        }
+        else
+        {
+            //update
+            _categoryRepository.Update(Category);
+        }
         _navigationManager.NavigateTo("category");
-
     }
 }
