@@ -62,20 +62,25 @@
 @code {
     private IEnumerable<CategoryDTO> Categories { get; set; } = new List<CategoryDTO>();
 
-    private bool IsLoading { get; set; } = true;
+    private bool IsLoading { get; set; }
 
     private int DeleteCategoryId { get; set; } = 0;
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        //this method(oninitialzedAsync) is used to display loading GIF when we face the delay while loading category list
-        await Task.Run(LoadCategories);
+        if(firstRender){
+            //we use loadcategories when it is first render and not the subsequent render
+            LoadCategories();
+        }
     }
 
     private void LoadCategories() 
     {
+        IsLoading = true;
+        StateHasChanged();
         Categories = _categoryRepository.GetAll();
         IsLoading = false;
+        StateHasChanged();
 
     }
 
