@@ -1,6 +1,9 @@
 ﻿@page "/category"
 @inject ICategoryRepository _categoryRepository
 @inject NavigationManager _navigationManager
+@inject IJSRuntime _jsRuntime
+
+<_DeleteConfirmation></_DeleteConfirmation>
 
 <div class="row mt-4">
     <div class="col-6 py-2">
@@ -31,7 +34,7 @@
                             </td>
                             <td>
                                 <NavLink href="@($"category/edit/{objCat.Id}")" class="btn btn-primary">Edit</NavLink>
-                                <NavLink href="@($"category/delete/")" class="btn btn-danger">Delete</NavLink>
+                               <button class="btn btn-danger" @onclick="()=>HandleDelete(objCat.Id)">Delete</button> @* If your method has parameter we should use arrow function*@
                             </td>
                         </tr>
                     }
@@ -61,6 +64,8 @@
 
     private bool IsLoading { get; set; } = true;
 
+    private int DeleteCategoryId { get; set; } = 0;
+
     protected override async Task OnInitializedAsync()
     {
         //this method(oninitialzedAsync) is used to display loading GIF when we face the delay while loading category list
@@ -72,5 +77,11 @@
         Categories = _categoryRepository.GetAll();
         IsLoading = false;
 
+    }
+
+    private void HandleDelete(int id)
+    {
+        DeleteCategoryId = id;
+        _jsRuntime.InvokeVoidAsync("ShowDeleteConfirmationModal");
     }
 }
