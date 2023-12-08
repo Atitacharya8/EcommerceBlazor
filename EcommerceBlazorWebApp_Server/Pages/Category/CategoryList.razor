@@ -11,7 +11,7 @@
         </a> 
     </div>
     <div class="col-12">
-        @if (Categories.Any())
+        @if(Categories.Any())
         {
             <table class="table table-bordered">
                 <thead>
@@ -36,15 +36,39 @@
                 </tbody>
             </table>
         }
+        else
+        {
+            if (IsLoading)
+            {
+                //loading git
+                <div class="text-center">
+                    <img src="/images/loading.gif" />
+                </div>
+            }
+            else
+            {
+                //no records
+                <p>No Records Found.</p>
+            }
+        }
     </div>
 </div>
 
 @code {
     private IEnumerable<CategoryDTO> Categories { get; set; } = new List<CategoryDTO>();
 
-    protected override void OnInitialized()
+    private bool IsLoading { get; set; } = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        //this method(oninitialzedAsync) is used to display loading GIF when we face the delay while loading category list
+        await Task.Run(LoadCategories);
+    }
+
+    private void LoadCategories()
     {
         Categories = _categoryRepository.GetAll();
+        IsLoading = false;
 
     }
 }
