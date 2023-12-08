@@ -46,7 +46,7 @@ namespace Ecommerce_Business.Repository
 
         public async Task<ProductDTO> Get(int id)
         {
-            var obj = await _db.Products.FirstOrDefaultAsync(c => c.Id == id);
+            var obj = await _db.Products.Include(u=>u.Category).FirstOrDefaultAsync(c => c.Id == id); //we want to populate the category as well so we need include here
             if (obj != null)
             {
                 //should get data by mapping from product source to productdto destination
@@ -60,7 +60,8 @@ namespace Ecommerce_Business.Repository
         public async Task<IEnumerable<ProductDTO>> GetAll()
         {
             //should get list of data by mapping from product source to productdto destination
-            return _mapper.Map<IEnumerable<Product>, IEnumerable<ProductDTO>>(_db.Products); //source will be retrieved using _db.Categories
+            //we want to populate the category as well so we need include here
+            return _mapper.Map<IEnumerable<Product>, IEnumerable<ProductDTO>>(_db.Products.Include(u => u.Category)); //source will be retrieved using _db.Products
         }
 
         public async Task<ProductDTO> Update(ProductDTO objDTO)
