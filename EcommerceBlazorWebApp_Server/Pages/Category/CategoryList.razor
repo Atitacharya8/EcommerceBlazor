@@ -3,7 +3,7 @@
 @inject NavigationManager _navigationManager
 @inject IJSRuntime _jsRuntime
 
-<_DeleteConfirmation></_DeleteConfirmation>
+<_DeleteConfirmation ConfirmationChanged="ConfirmDelete_Click"></_DeleteConfirmation>
 
 <div class="row mt-4">
     <div class="col-6 py-2">
@@ -82,6 +82,17 @@
     private void HandleDelete(int id)
     {
         DeleteCategoryId = id;
-        _jsRuntime.InvokeVoidAsync("ShowDeleteConfirmationModal");
+        _jsRuntime.InvokeVoidAsync("ShowDeleteConfirmationModal"); //"ShowDeleteConfirmationModal" is not returning anything so we will use invokevoidasync method
+    }
+
+    public async Task ConfirmDelete_Click(bool isConfirmed)
+    {
+        if (isConfirmed && DeleteCategoryId != 0)
+        {
+            //delete
+            _categoryRepository.Delete(DeleteCategoryId);
+            LoadCategories();
+            _jsRuntime.InvokeVoidAsync("HideDeleteConfirmationModal");
+        }
     }
 }

@@ -26,6 +26,8 @@ window.ShowSwal = (type, message) => {
     }
 }
 
+/*it is not returning anything so we will use invokevoidasync method*/
+
 function ShowDeleteConfirmationModal() {
 
     $('#deleteConfirmationModal').modal('show');
