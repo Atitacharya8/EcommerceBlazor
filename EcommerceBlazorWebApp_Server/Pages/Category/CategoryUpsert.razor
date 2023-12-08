@@ -43,10 +43,11 @@
 
     private CategoryDTO Category { get; set; } = new CategoryDTO();
     private string Title { get; set; } = "Create";
-    private bool IsLoading { get; set; } = true;
+    private bool IsLoading { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        if(firstRender){
         if (Id == 0)
         {
             //create
@@ -56,16 +57,19 @@
         {
             //update
             Title = "Update";
-            await Task.Run(LoadCategory);
+            LoadCategory();
         }
         //this method(oninitialzedAsync) is used to display loading GIF when we face the delay while loading category list
-
+        }
     }
 
     private void LoadCategory()
     {
+        IsLoading = true;
+        StateHasChanged(); //IsLoading is true it means the state has changed and the UI needs to re-render
         Category = _categoryRepository.Get(Id);
         IsLoading = false;
+        StateHasChanged();//IsLoading is false it means the state has changed and the UI needs to re-render
 
     }
 
