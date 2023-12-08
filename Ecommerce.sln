@@ -9,11 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcommerceBlazorWebApp_Clien
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecommerce_Models", "Ecommerce_Models\Ecommerce_Models.csproj", "{76F18C99-2A8B-46C5-9056-267D8AAAC355}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce_Business", "Ecommerce_Business\Ecommerce_Business.csproj", "{D6A78990-E41B-4A1C-823B-08DA7DEA694F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecommerce_Business", "Ecommerce_Business\Ecommerce_Business.csproj", "{D6A78990-E41B-4A1C-823B-08DA7DEA694F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce_Common", "Ecommerce_Common\Ecommerce_Common.csproj", "{CEAF4F5C-A344-46E3-8CC0-0BD743217EC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecommerce_Common", "Ecommerce_Common\Ecommerce_Common.csproj", "{CEAF4F5C-A344-46E3-8CC0-0BD743217EC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce_DataAccess", "Ecommerce_DataAccess\Ecommerce_DataAccess.csproj", "{C09A9893-6464-4F48-BA15-6193092F6326}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecommerce_DataAccess", "Ecommerce_DataAccess\Ecommerce_DataAccess.csproj", "{C09A9893-6464-4F48-BA15-6193092F6326}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
