@@ -43,7 +43,7 @@ namespace EcommerceBlazorWebApp_Server.Service
             await using FileStream fs = new FileStream(filePath, FileMode.Create);
             await file.OpenReadStream().CopyToAsync(fs);//we will receive the file in filestream
 
-            var fullPath = $"images/product/{fileName}";
+            var fullPath = $"/images/product/{fileName}";
             return fullPath;
         }
     }
