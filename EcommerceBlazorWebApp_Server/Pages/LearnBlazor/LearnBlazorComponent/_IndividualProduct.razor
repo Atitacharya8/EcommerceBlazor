@@ -29,7 +29,7 @@
     [Parameter]
     public EventCallback<string> OnLastSelectedProductChange { get; set; }
 
-    private async Task FavoriteUpdated(ChangeEventArgs e)
+    private async Task FavoriteUpdated(Microsoft.AspNetCore.Components.ChangeEventArgs e) //there is ChangeEventArgs in syncfustion also so the to remove contradiction we should give full reference
     {
         await OnFavoriteUpdated.InvokeAsync((bool)e.Value); //e changed to boolen datatype (we will need explicit conversion)
     }

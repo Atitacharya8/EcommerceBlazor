@@ -5,12 +5,14 @@ using EcommerceBlazorWebApp_Server.Data;
 using EcommerceBlazorWebApp_Server.Service;
 using EcommerceBlazorWebApp_Server.Service.IService;
 using Microsoft.EntityFrameworkCore;
+using Syncfusion.Blazor;
 using System.Reflection.Metadata;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddSyncfusionBlazor();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
@@ -19,6 +21,8 @@ builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();//<interfacerepository, implementationrepository>
 builder.Services.AddScoped<IFileUpload, FileUpload>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mjk3MDA0NkAzMjMzMmUzMDJlMzBEL2tXWk15SUdhUzU3OFhudkoxU0VERFFKMkltNUIwa0RiVlNNZEo3UFI4PQ==");
 
 var app = builder.Build();
 
