@@ -2,6 +2,8 @@ using Ecommerce_Business.Repository;
 using Ecommerce_Business.Repository.IRepository;
 using Ecommerce_DataAccess.Data;
 using EcommerceBlazorWebApp_Server.Data;
+using EcommerceBlazorWebApp_Server.Service;
+using EcommerceBlazorWebApp_Server.Service.IService;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
 
@@ -15,6 +17,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();//<interfacerepository, implementationrepository>
+builder.Services.AddScoped<IFileUpload, FileUpload>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
