@@ -25,28 +25,19 @@
   </ItemGroup>
 
   <ItemGroup>
-<<<<<<< HEAD
+
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.22" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.0" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.JSInterop.WebAssembly" Version="6.0.0" />
+	  
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Ecommerce_WebAPI\Ecommerce_WebAPI.csproj" />
-  </ItemGroup>
-	
 
-=======
-    <ProjectReference Include="..\Ecommerce_WebAPI\Ecommerce_WebAPI.csproj" />
-  </ItemGroup>
->>>>>>> 5b57bbbb3986ab6145782cc5ab64803d884524a5
 
 </Project>
  
