@@ -37,7 +37,7 @@ namespace Ecommerce_WebAPI.Controllers
                 });
             }
 
-            var product = _productRepository.Get(productId.Value);
+            var product = await _productRepository.Get(productId.Value);
 
             if(product == null) // here we have id as nullable so we have to check if product is null nor has value
             {
