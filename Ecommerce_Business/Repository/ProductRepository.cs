@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿ using AutoMapper;
 using Ecommerce_Business.Repository.IRepository;
 using Ecommerce_DataAccess;
 using Ecommerce_DataAccess.Data;
@@ -46,7 +46,7 @@ namespace Ecommerce_Business.Repository
 
         public async Task<ProductDTO> Get(int id)
         {
-            var obj = await _db.Products.Include(u=>u.Category).FirstOrDefaultAsync(c => c.Id == id); //we want to populate the category as well so we need include here
+            var obj = await _db.Products.Include(u=>u.Category).Include(u=>u.ProductPrices).FirstOrDefaultAsync(c => c.Id == id); //we want to populate the category as well so we need include here
             if (obj != null)
             {
                 //should get data by mapping from product source to productdto destination
@@ -61,7 +61,7 @@ namespace Ecommerce_Business.Repository
         {
             //should get list of data by mapping from product source to productdto destination
             //we want to populate the category as well so we need include here
-            return _mapper.Map<IEnumerable<Product>, IEnumerable<ProductDTO>>(_db.Products.Include(u => u.Category)); //source will be retrieved using _db.Products
+            return _mapper.Map<IEnumerable<Product>, IEnumerable<ProductDTO>>(_db.Products.Include(u => u.Category).Include(u => u.ProductPrices)); //source will be retrieved using _db.Products
         }
 
         public async Task<ProductDTO> Update(ProductDTO objDTO)

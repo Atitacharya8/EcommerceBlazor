@@ -26,5 +26,6 @@ namespace Ecommerce_Models
        
 
         public CategoryDTO Category { get; set; }
+        public ICollection<ProductPriceDTO> ProductPrices { get; set; }
     }
 }

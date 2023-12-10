@@ -13,6 +13,7 @@ namespace Ecommerce_Business.Mapper
             // Method 2: CreateMap<CategoryDTO, Category>();
 
             CreateMap<Product, ProductDTO>().ReverseMap();
+            CreateMap<ProductPrice, ProductPriceDTO>().ReverseMap();
         }
     }
 }
