@@ -1,18 +1,49 @@
 ﻿using Ecommerce_Models;
 using EcommerceBlazorWebApp_Client.Service.IService;
+using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace EcommerceBlazorWebApp_Client.Service
 {
     public class ProductService : IProductService
     {
-        public Task<ProductDTO> Get(int productId)
+        private readonly HttpClient _httpClient;
+        public ProductService(HttpClient httpClient)
         {
-            throw new NotImplementedException();
+
+            _httpClient = httpClient;
+        }
+        public async Task<ProductDTO> Get(int productId)
+        {
+            var response = await _httpClient.GetAsync($"/api/product/{productId}"); //string interpolation to add productID inside url
+            var content = await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                
+                var product = JsonConvert.DeserializeObject<ProductDTO>(content);
+                return product;
+            }
+            else
+            {
+                var errorModel = JsonConvert.DeserializeObject<ErrorModelDTO>(content);
+                throw new Exception(errorModel.ErrorMessage);
+
+            }
         }
 
-        public Task<IEnumerable<ProductDTO>> GetAll()
+        public async Task<IEnumerable<ProductDTO>> GetAll()
         {
-            throw new NotImplementedException();
+            var response = await _httpClient.GetAsync("/api/product");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var products = JsonConvert.DeserializeObject<IEnumerable<ProductDTO>>(content);
+                return products;
+            }
+
+            //if we don't get anything a empty list
+            return new List<ProductDTO>();
         }
     }
 }
