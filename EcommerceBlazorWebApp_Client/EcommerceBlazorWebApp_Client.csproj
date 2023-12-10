@@ -37,6 +37,10 @@
 	  
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Ecommerce_Models\Ecommerce_Models.csproj" />
+  </ItemGroup>
+
 
 
 </Project>
