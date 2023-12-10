@@ -22,5 +22,8 @@ namespace Ecommerce_Models
         public string Size { get; set; }
         [Range(1, int.MaxValue, ErrorMessage ="Price must be greater than 1")]
         public double Price { get; set; }
+
+        public ICollection<ProductPriceDTO> ProductPrices { get; set; }
+
     }
 }
