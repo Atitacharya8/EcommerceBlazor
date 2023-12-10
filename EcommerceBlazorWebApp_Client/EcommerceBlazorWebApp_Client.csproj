@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.22" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.0" />
@@ -42,6 +43,10 @@
   </ItemGroup>
 	
 
+=======
+    <ProjectReference Include="..\Ecommerce_WebAPI\Ecommerce_WebAPI.csproj" />
+  </ItemGroup>
+>>>>>>> 5b57bbbb3986ab6145782cc5ab64803d884524a5
 
 </Project>
  
