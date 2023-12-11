@@ -41,6 +41,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Ecommerce_Common\Ecommerce_Common.csproj" />
     <ProjectReference Include="..\Ecommerce_Models\Ecommerce_Models.csproj" />
   </ItemGroup>
 
