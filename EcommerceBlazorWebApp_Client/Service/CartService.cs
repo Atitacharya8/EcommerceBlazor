@@ -8,16 +8,16 @@ namespace EcommerceBlazorWebApp_Client.Service
 
     public class CartService : ICartService
     {
-        private readonly ILocalStorageService _localStorageService;
+        private readonly ILocalStorageService _localStorage;
         public CartService(ILocalStorageService localStorageService)
         {
-            _localStorageService= localStorageService;
+            _localStorage= localStorageService;
         }
 
         public async Task DecrementCart(ShoppingCart cartToDecrement)
         {
             //get all of the items in cart variable
-            var cart = await _localStorageService.GetItemAsync<List<ShoppingCart>>(SD.ShoppingCart);
+            var cart = await _localStorage.GetItemAsync<List<ShoppingCart>>(SD.ShoppingCart);
                 
             //if count is 0 or 1 then we remove the item
             for(int i =0; i<cart.Count; i++)
@@ -35,12 +35,12 @@ namespace EcommerceBlazorWebApp_Client.Service
                    
                 }
             }
-            await _localStorageService.SetItemAsync(SD.ShoppingCart, cart);
+            await _localStorage.SetItemAsync(SD.ShoppingCart, cart);
         }
 
         public async Task IncrementCart(ShoppingCart cartToAdd)
         {
-            var cart = await _localStorageService.GetItemAsync<List<ShoppingCart>>(SD.ShoppingCart);
+            var cart = await _localStorage.GetItemAsync<List<ShoppingCart>>(SD.ShoppingCart);
             bool itemInCart = false;
 
             if(cart == null)
@@ -69,7 +69,7 @@ namespace EcommerceBlazorWebApp_Client.Service
                 });
             }
 
-            await _localStorageService.SetItemAsync(SD.ShoppingCart, cart);
+            await _localStorage.SetItemAsync(SD.ShoppingCart, cart);
         }
     }
 }
