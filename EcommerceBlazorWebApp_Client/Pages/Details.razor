@@ -1,4 +1,5 @@
 ﻿@page "/details/{ProductId:int}"
+@using EcommerceBlazorWebApp_Client.ViewModels;
 
 @inject IProductService _productService
 
@@ -77,6 +78,8 @@ else{
     public ProductDTO Product { get; set; } = new();
 
     public bool IsProcessing { get; set; } = false;
+
+    public DetailsVM DetailsVM { get; set; } = new();
 
     protected override async Task OnInitializedAsync()
     {
