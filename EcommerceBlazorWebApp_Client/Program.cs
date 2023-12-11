@@ -1,3 +1,4 @@
+using Blazored.LocalStorage;
 using EcommerceBlazorWebApp_Client;
 using EcommerceBlazorWebApp_Client.Service;
 using EcommerceBlazorWebApp_Client.Service.IService;
@@ -10,5 +11,6 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.Configuration.GetValue<string>("BaseAPIUrl")) });
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddBlazoredLocalStorage();
 
 await builder.Build().RunAsync();
