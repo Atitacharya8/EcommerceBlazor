@@ -1,4 +1,6 @@
-﻿ <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-dark bg-dark">
+﻿@inject ISyncLocalStorageService _localStorage // for synchronous we use this service
+
+ <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">E-Commerce</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,7 +11,9 @@
                
                 <li class="nav-item p-0">
                     <NavLink class="nav-link" href="/cart">
-                        <span class="p-2">Cart</span>
+                        <span class="p-2">
+                            <i class="bi bi-cart"></i>(@GetCartCount())
+                            </span>
                     </NavLink>
                 </li>
                 </ul>
@@ -32,3 +36,11 @@
         </div>
     </div>
 </nav>
+
+@code{
+    private int GetCartCount()
+    {
+        var cart = _localStorage.GetItem<List<ShoppingCart>>(SD.ShoppingCart);
+        return cart == null? 0 : cart.Count; //if cart is null return 0 else return Count
+    }
+}
