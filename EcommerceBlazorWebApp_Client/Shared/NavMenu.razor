@@ -1,4 +1,8 @@
-﻿@inject ISyncLocalStorageService _localStorage // for synchronous we use this service
+﻿@* this is used for synchronous action  *@
+@inject ISyncLocalStorageService _localStorage
+@inject ICartService _cartService
+@implements IDisposable
+
 
  <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-dark bg-dark">
     <div class="container-fluid">
@@ -38,6 +42,17 @@
 </nav>
 
 @code{
+    protected override void OnInitialized()
+    {
+        _cartService.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        _cartService.OnChange -= StateHasChanged;
+    }
+
+
     private int GetCartCount()
     {
         var cart = _localStorage.GetItem<List<ShoppingCart>>(SD.ShoppingCart);
