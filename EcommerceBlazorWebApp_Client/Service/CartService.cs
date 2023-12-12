@@ -24,7 +24,7 @@ namespace EcommerceBlazorWebApp_Client.Service
             {
                 if (cart[i].ProductId == cartToDecrement.ProductId && cart[i].ProductPriceId == cartToDecrement.ProductPriceId)
                 {
-                    if (cart[i].Count==1 || cart[i].Count==0) 
+                    if (cart[i].Count == 1 || cart[i].Count == 0) 
                     {
                         cart.Remove(cart[i]);
                     }
