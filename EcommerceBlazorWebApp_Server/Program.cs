@@ -21,6 +21,7 @@ builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();//<interfacerepository, implementationrepository>
 builder.Services.AddScoped<IProductPriceRepository, ProductPriceRepository>();//<interfacerepository, implementationrepository>
 builder.Services.AddScoped<IFileUpload, FileUpload>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mjk3MDA0NkAzMjMzMmUzMDJlMzBEL2tXWk15SUdhUzU3OFhudkoxU0VERFFKMkltNUIwa0RiVlNNZEo3UFI4PQ==");
