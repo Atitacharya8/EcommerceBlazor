@@ -2,6 +2,7 @@
 @inject ICategoryRepository _categoryRepository
 @inject NavigationManager _navigationManager
 @inject IJSRuntime _jsRuntime
+@attribute [Authorize]
 
 <_DeleteConfirmation IsParentComponentProcessing="IsLoading" ConfirmationChanged="ConfirmDelete_Click"></_DeleteConfirmation>
 
