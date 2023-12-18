@@ -46,6 +46,8 @@ else
 
 app.UseHttpsRedirection();
 
+
+
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -53,6 +55,7 @@ app.UseRouting();
 //this will configure signalR for our application
 app.MapBlazorHub(); //signalR is the heart and engine of the Blazor application
 app.MapFallbackToPage("/_Host");
-app.UseAuthentication();;
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.Run();
