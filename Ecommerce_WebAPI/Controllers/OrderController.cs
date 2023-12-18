@@ -9,24 +9,24 @@ namespace Ecommerce_WebAPI.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
-        private readonly IProductRepository _productRepository;
-        public OrderController(IProductRepository productRepository)
+        private readonly IOrderRepository _orderRepository;
+        public OrderController(IOrderRepository orderRepository)
         {
-            _productRepository = productRepository;
+            _orderRepository = orderRepository;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(await _productRepository.GetAll()); //its api so we pass it using ok keyword
+            return Ok(await _orderRepository.GetAll()); //its api so we pass it using ok keyword
         }
 
 
-        [HttpGet("{productId}")]
+        [HttpGet("{orderHeaderId}")]
         // [ProducesResponseType(400)]
-        public async Task<IActionResult> Get(int? productId)
+        public async Task<IActionResult> Get(int? orderHeaderId)
         {
-            if(productId == null || productId == 0)
+            if(orderHeaderId == null || orderHeaderId == 0)
             {
                 return BadRequest(new ErrorModelDTO()
                 {
@@ -37,9 +37,9 @@ namespace Ecommerce_WebAPI.Controllers
                 });
             }
 
-            var product = await _productRepository.Get(productId.Value);
+            var orderHeader = await _orderRepository.Get(orderHeaderId.Value);
 
-            if(product == null) // here we have id as nullable so we have to check if product is null nor has value
+            if(orderHeader == null) // here we have id as nullable so we have to check if product is null nor has value
             {
                 return BadRequest(new ErrorModelDTO() {
                     ErrorMessage = "Invalid Id",
@@ -48,7 +48,7 @@ namespace Ecommerce_WebAPI.Controllers
                    
             }
 
-            return Ok(product);
+            return Ok(orderHeader);
         }
     }
 }
