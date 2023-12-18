@@ -100,15 +100,7 @@ namespace EcommerceBlazorWebApp_Server.Areas.Identity.Pages.Account
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
-            if (!await _roleManager.RoleExistsAsync(SD.Role_Admin))
-            {
-                _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).GetAwaiter().GetResult();
-                _roleManager.CreateAsync(new IdentityRole(SD.Role_Customer)).GetAwaiter().GetResult();
-
-
-                //or if the method is async
-                // await _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin));
-            }
+            
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
@@ -126,8 +118,8 @@ namespace EcommerceBlazorWebApp_Server.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
-                    
-                       await _userManager.AddToRoleAsync(user, SD.Role_Admin);
+                    //setting role_custome by default
+                       await _userManager.AddToRoleAsync(user, SD.Role_Customer);
                    
 
                     _logger.LogInformation("User created a new account with password.");
