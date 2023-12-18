@@ -7,6 +7,7 @@ using EcommerceBlazorWebApp_Server.Service.IService;
 using Microsoft.EntityFrameworkCore;
 using Syncfusion.Blazor;
 using System.Reflection.Metadata;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,9 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();//<interfacerepository, implementationrepository>
 builder.Services.AddScoped<IProductPriceRepository, ProductPriceRepository>();//<interfacerepository, implementationrepository>
@@ -49,5 +53,6 @@ app.UseRouting();
 //this will configure signalR for our application
 app.MapBlazorHub(); //signalR is the heart and engine of the Blazor application
 app.MapFallbackToPage("/_Host");
+app.UseAuthentication();;
 
 app.Run();
