@@ -69,5 +69,44 @@ namespace Ecommerce_WebAPI.Controllers
             return StatusCode(201); //201 means record has been created and request has been fulfilled
 
         }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> SignIn([FromBody] SignInRequestDTO signInRequestDTO)
+        {
+            if (signInRequestDTO == null || !ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var result = await _signInManager.PasswordSignInAsync(signInRequestDTO.UserName, signInRequestDTO.Password, false, false);
+            if (result.Succeeded)
+            {
+                var user = await _userManager.FindByNameAsync(signInRequestDTO.UserName);
+                if (user == null)
+                {
+                    return Unauthorized(new SignInResponseDTO
+                    {
+                        IsAuthSuccessful = false,
+                        ErrorMessage = "Invalid Authentication"
+                    });
+                }
+
+                //everything is valid and we need to login 
+
+
+            }
+            else
+            {
+                return Unauthorized(new SignInResponseDTO
+                {
+                    IsAuthSuccessful = false,
+                    ErrorMessage = "Invalid Authentication"
+                });
+            }
+
+            return StatusCode(201);
+        }
     }
 }
