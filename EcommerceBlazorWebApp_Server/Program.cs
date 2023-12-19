@@ -4,10 +4,9 @@ using Ecommerce_DataAccess.Data;
 using EcommerceBlazorWebApp_Server.Data;
 using EcommerceBlazorWebApp_Server.Service;
 using EcommerceBlazorWebApp_Server.Service.IService;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Syncfusion.Blazor;
-using System.Reflection.Metadata;
-using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,8 +21,8 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectio
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders().AddDefaultUI()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
-builder.Services.AddScoped<IProductRepository, ProductRepository>();//<interfacerepository, implementationrepository>
-builder.Services.AddScoped<IProductPriceRepository, ProductPriceRepository>();//<interfacerepository, implementationrepository>
+builder.Services.AddScoped<IProductRepository, ProductRepository>();  // <interfacerepository, implementationrepository>
+builder.Services.AddScoped<IProductPriceRepository, ProductPriceRepository>(); // <interfacerepository, implementationrepository>
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 builder.Services.AddScoped<IFileUpload, FileUpload>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
