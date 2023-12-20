@@ -1,5 +1,7 @@
 ﻿using Ecommerce_Business.Repository.IRepository;
+using Ecommerce_Common;
 using Ecommerce_Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce_WebAPI.Controllers
@@ -15,6 +17,7 @@ namespace Ecommerce_WebAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = SD.Role_Customer)]
         public async Task<IActionResult> GetAll()
         {
             return Ok(await _productRepository.GetAll()); //its api so we pass it using ok keyword
