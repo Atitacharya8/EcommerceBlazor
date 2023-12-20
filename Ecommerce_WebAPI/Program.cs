@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Identity;
 using Ecommerce_DataAccess;
+using Ecommerce_WebAPI.Helper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddDefaultTokenProviders() //applicationuser to capture the user's name in webapi project
     .AddEntityFrameworkStores<ApplicationDbContext>();
+
+var apiSettingsSection = builder.Configuration.GetSection("APISettings"); //keyname = "APISettings"
+builder.Services.Configure<APISettings>(apiSettingsSection);
+
+
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

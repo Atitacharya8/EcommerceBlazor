@@ -1,8 +1,10 @@
 ﻿using Ecommerce_Common;
 using Ecommerce_DataAccess;
 using Ecommerce_Models;
+using Ecommerce_WebAPI.Helper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace Ecommerce_WebAPI.Controllers
 {
@@ -14,15 +16,18 @@ namespace Ecommerce_WebAPI.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly APISettings _aPISettings;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+             IOptions<APISettings> options)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            _aPISettings = options.Value;
         }
 
         [HttpPost]
@@ -93,7 +98,10 @@ namespace Ecommerce_WebAPI.Controllers
                     });
                 }
 
-                //everything is valid and we need to login 
+                //everything is valid and we need to login
+               
+
+                
 
 
             }
