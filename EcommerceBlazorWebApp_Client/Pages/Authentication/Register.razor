@@ -69,7 +69,9 @@
     {
         ShowRegistrationErrors = false;
         IsProcessing = true;
-        var result = _authSerivce.RegisterUser(SignUpRequest).GetAwaiter().GetResult();
+
+        //Blazor web assembly runs on the single threaded environment that is why any blocking will results in deadlock of the application so Getawaiter().Getresult() will block the call
+        var result = await _authSerivce.RegisterUser(SignUpRequest);
         if (result.IsRegisterationSuccessful)
         {
             //regiration is successful

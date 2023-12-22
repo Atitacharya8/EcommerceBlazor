@@ -64,7 +64,7 @@ namespace EcommerceBlazorWebApp_Client.Service
             }
             else
             {
-                return new SignUpResponseDTO { IsRegisterationSuccessful = false };
+                return new SignUpResponseDTO { IsRegisterationSuccessful = false, Errors = result.Errors };
             }
         }
     }
