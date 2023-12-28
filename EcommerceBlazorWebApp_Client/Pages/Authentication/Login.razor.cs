@@ -1,6 +1,7 @@
 ﻿using Ecommerce_Models;
 using EcommerceBlazorWebApp_Client.Service.IService;
 using Microsoft.AspNetCore.Components;
+using System.Web;
 
 namespace EcommerceBlazorWebApp_Client.Pages.Authentication
 {
@@ -16,24 +17,38 @@ namespace EcommerceBlazorWebApp_Client.Pages.Authentication
             public IAuthenticationService _authSerivce { get; set; }
             [Inject]
             public NavigationManager _navigationManager { get; set; }
+            public string ReturnUrl { get; set; }
 
             private async Task LoginUser()
             {
                 ShowSignInErrors = false;
                 IsProcessing = true;
                 var result = await _authSerivce.Login(SignInRequest);
-                if (result.IsAuthSuccessful)
+            if (result.IsAuthSuccessful)
+            {
+                //regiration is successful
+                var absoluteUri = new Uri(_navigationManager.Uri);
+                var queryParam = HttpUtility.ParseQueryString(absoluteUri.Query);
+                ReturnUrl = queryParam["returnUrl"];
+
+
+                if (string.IsNullOrEmpty(ReturnUrl))
                 {
-                    //regiration is successful
+
                     _navigationManager.NavigateTo("/");
                 }
                 else
                 {
-                    //failure
-                    Errors = result.ErrorMessage;
-                    ShowSignInErrors = true;
-
+                    _navigationManager.NavigateTo("/" + ReturnUrl);
                 }
+            }
+            else
+            {
+                //failure
+                Errors = result.ErrorMessage;
+                ShowSignInErrors = true;
+
+            }
                 IsProcessing = false;
             }
         }
