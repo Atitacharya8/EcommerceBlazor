@@ -25,7 +25,7 @@ namespace EcommerceBlazorWebApp_Client.Pages.Authentication
                 if (result.IsAuthSuccessful)
                 {
                     //regiration is successful
-                    _navigationManager.NavigateTo("/");
+                    _navigationManager.NavigateTo("/", forceLoad: true);
                 }
                 else
                 {
