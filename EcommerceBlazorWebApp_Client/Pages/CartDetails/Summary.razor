@@ -1,6 +1,6 @@
 ﻿@page "/summary"
 
-
+@inject IPaymentService _paymentService
 @inject IJSRuntime _jsRuntime
 @inject ILocalStorageService _localStorage
 @inject IProductService _productService
@@ -146,7 +146,7 @@ else{
 
             //Add all the order details in OrderDetails inside Order object
             Order.OrderDetails.Add(orderDetailDTO);
-            Order.OrderHeader.OrderTotal += (cart.Count * productPrice.Price);
+            Order.OrderHeader.OrderTotal += (item.Count * productPrice.Price);
 
         }
 
@@ -174,7 +174,13 @@ else{
                     Order = Order
                 };
 
-            var orderHeaderSaved = await _orderService.Create(paymentDto);
+            var result = await _paymentService.Checkout(paymentDto);
+
+            Order.OrderHeader.SessionId = result.Data.ToString();
+
+            var orderDTOSaved = await _orderService.Create(paymentDto);
+
+            await _jsRuntime.InvokeVoidAsync("redirectToCheckout", result.Data.ToString());
         }
         catch (Exception e)
         {
