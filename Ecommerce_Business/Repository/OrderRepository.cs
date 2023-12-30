@@ -31,12 +31,13 @@ namespace Ecommerce_Business.Repository
 
                 foreach (var details in obj.OrderDetails)
                 {
+                    //method 1
                     details.OrderHeaderId = obj.OrderHeader.Id;
-                    // method 1
+                    // method 2
                     // _db.OrderDetails.Add(details); 
 
                 }
-                //method 2
+                //method to create multiple orderdetails
                 _db.OrderDetails.AddRange(obj.OrderDetails);
                 await _db.SaveChangesAsync();
 
