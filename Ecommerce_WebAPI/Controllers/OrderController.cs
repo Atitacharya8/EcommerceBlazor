@@ -50,6 +50,15 @@ namespace Ecommerce_WebAPI.Controllers
 
             return Ok(orderHeader);
         }
+
+        [HttpPost]
+        [ActionName("create")]
+        public async Task<IActionResult> Create([FromBody] StripePaymentDTO paymentDTO)
+        {
+            paymentDTO.Order.OrderHeader.OrderDate = DateTime.Now;
+            var result = await _orderRepository.Create(paymentDTO.Order);
+            return Ok(result);
+        }
     }
 }
  
