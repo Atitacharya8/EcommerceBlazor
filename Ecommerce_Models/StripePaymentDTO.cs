@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace Ecommerce_Models
             SuccessUrl = "OrderConfirmation";
             CancelUrl = "Summary";
         }
+       // [ValidateNever] --> using this line of code is not compatible by web assembly because it is not in the client side project
         public OrderDTO Order { get; set; }
         public string SuccessUrl { get; set; }
         public string CancelUrl { get; set; }
