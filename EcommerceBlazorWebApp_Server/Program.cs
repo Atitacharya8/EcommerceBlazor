@@ -6,6 +6,7 @@ using EcommerceBlazorWebApp_Server.Service;
 using EcommerceBlazorWebApp_Server.Service.IService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Stripe;
 using Syncfusion.Blazor;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,6 +32,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mjk3MDA0NkAzMjMzMmUzMDJlMzBEL2tXWk15SUdhUzU3OFhudkoxU0VERFFKMkltNUIwa0RiVlNNZEo3UFI4PQ==");
 
 var app = builder.Build();
+StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe")["ApiKey"];
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
