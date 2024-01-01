@@ -9,13 +9,14 @@ namespace Ecommerce_WebAPI.Controllers
     [Route("api/[controller]/[action]")]
     public class StripePaymentController : Controller
     {
-        
+
         private readonly IConfiguration _configuration;
 
         public StripePaymentController(IConfiguration configuration)
         {
             _configuration = configuration;
         }
+
 
         [HttpPost]
         [Authorize]
@@ -25,7 +26,7 @@ namespace Ecommerce_WebAPI.Controllers
             try
             {
 
-                var domain = _configuration.GetValue<string>("Ecommerce_Client_URL");
+                var domain = _configuration.GetValue<string>("Tangy_Client_URL");
 
                 var options = new SessionCreateOptions
                 {
@@ -36,7 +37,7 @@ namespace Ecommerce_WebAPI.Controllers
                     PaymentMethodTypes = new List<string> { "card" }
                 };
 
-                //get all items for LineItems in OrderDetails
+
                 foreach (var item in paymentDTO.Order.OrderDetails)
                 {
                     var sessionLineItem = new SessionLineItemOptions
@@ -69,7 +70,6 @@ namespace Ecommerce_WebAPI.Controllers
                     ErrorMessage = ex.Message
                 });
             }
-
         }
     }
 }

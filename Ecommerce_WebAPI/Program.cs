@@ -101,6 +101,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+//app.UseSwagger();
+//app.UseSwaggerUI(c => {
+//    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Ecommerce Blazor API v1");
+//    c.RoutePrefix = String.Empty;
+//});
+
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseCors("Ecommerce");
