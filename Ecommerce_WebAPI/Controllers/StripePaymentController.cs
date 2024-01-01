@@ -59,7 +59,7 @@ namespace Ecommerce_WebAPI.Controllers
                 Session session = service.Create(options);
                 return Ok(new SuccessModelDTO()
                 {
-                    Data = session.Id
+                    Data = session.Id + ";" + session.PaymentIntentId
                 });
             }
             catch (Exception ex)
