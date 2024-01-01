@@ -1,6 +1,7 @@
 ﻿using Ecommerce_Business.Repository.IRepository;
 using Ecommerce_Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Stripe.Checkout;
 
@@ -11,9 +12,11 @@ namespace Ecommerce_WebAPI.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IOrderRepository _orderRepository;
-        public OrderController(IOrderRepository orderRepository)
+        private readonly IEmailSender _emailSender;
+        public OrderController(IOrderRepository orderRepository, IEmailSender emailSender)
         {
             _orderRepository = orderRepository;
+             _emailSender = emailSender;
         }
 
         [HttpGet]
@@ -70,6 +73,8 @@ namespace Ecommerce_WebAPI.Controllers
             if (sessionDetails.PaymentStatus == "paid")
             {
                 var result = await _orderRepository.MarkPaymentSuccessful(orderHeaderDTO.Id);
+                await _emailSender.SendEmailAsync(orderHeaderDTO.Email, "Order Confirmation",
+                   "New Order has been created :" + orderHeaderDTO.Id);
                 if (result == null)
                 {
                     return BadRequest(new ErrorModelDTO()
